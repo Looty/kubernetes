@@ -1,0 +1,16 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+metadata:
+  name: cluster
+servers: 1
+kubeAPI:
+  hostIP: "127.0.0.1"
+  hostPort: "6445"
+image: rancher/k3s:v1.24.4-k3s1
+options:
+  k3d:
+    wait: true
+    timeout: "60s"
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

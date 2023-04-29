@@ -1,0 +1,57 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "dev-k8s-ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"username": "vscode",
+			"uid": "1000",
+			"gid": "1000"
+		},
+		"ghcr.io/rio/features/k3d:1": {},
+		"ghcr.io/rio/features/k9s:1": {},
+		"docker-in-docker": { // for k3d
+			"version": "latest",
+			"moby": true,
+			"dockerDashComposeVersion": "v1"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"usernamehw.errorlens",
+				"eamodio.gitlens",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"redhat.vscode-yaml",
+				"aaron-bond.better-comments",
+				"ms-azuretools.vscode-docker",
+				"tal7aouy.icons"
+			]
+		},
+		"settings": {
+			"terminal.integrated.defaultProfile.linux": "/bin/zsh",
+			"terminal.integrated.profiles.linux": {
+				"zsh": {
+					"path": "/usr/bin/zsh"
+				}
+			},
+			"editor.tabSize": 4
+		}
+	},
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "."
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// This can be used to network with other containers or the host.
+	"forwardPorts": [
+		8080
+	]
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
